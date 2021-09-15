@@ -1,24 +1,12 @@
 "use strict";
-
-function initAllLogsArray(logSources) {
-  const allLogsArray = [];
+const { LogsList } = require('./list.class');
+function createLogsList(logSources) {
+  const logsList = new LogsList();
   for(let i = 0; i < logSources.length; i++) {
-    allLogsArray.push(logSources[i].last);
+    logsList.insert(i, logSources[i].last.date.getTime());
   }
-  return allLogsArray;
-}
-function getMinIndex(allLogsArray) {
-  let minIndex;
-  let minValue = Infinity;
-  for (let j = 0; j < allLogsArray.length; j++) {
-    if(allLogsArray[j].date.getTime() < minValue) {
-      minValue = allLogsArray[j].date.getTime();
-      minIndex = j;
-    }
-  }
-  return minIndex;
+  return logsList;
 }
 module.exports = {
-  initAllLogsArray,
-  getMinIndex
+  createLogsList
 }
