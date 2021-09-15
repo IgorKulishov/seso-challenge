@@ -1,17 +1,15 @@
 "use strict";
-const { initAllLogsArray, getMinIndex } = require('./utils');
+const { createLogsList } = require('./utils');
+
 // Print all entries, across all of the sources, in chronological order.
 module.exports = (logSources, printer) => {
-  const allLogsArray = initAllLogsArray(logSources);
-  while(allLogsArray.length > 0) {
-    const minIndex = getMinIndex(allLogsArray);
-    printer.print(allLogsArray[minIndex]);
-    const newSourceLog = logSources[minIndex].pop();
-    if (newSourceLog) {
-      allLogsArray[minIndex] = logSources[minIndex].last;
-    } else {
-      allLogsArray.splice(minIndex, 1);
-      logSources.splice(minIndex, 1);
+  const allLogsList = createLogsList(logSources);
+  while(allLogsList.head) {
+    const logsArrayIndex = allLogsList.shift().logsArrayIndex;
+    printer.print(logSources[logsArrayIndex].last);
+    const newSourceLog = logSources[logsArrayIndex].pop();
+    if(newSourceLog) {
+      allLogsList.insert(logsArrayIndex, newSourceLog.date.getTime())
     }
   }
   printer.done();
