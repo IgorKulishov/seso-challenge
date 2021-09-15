@@ -2,7 +2,6 @@
 
 class Node {
   constructor(logsArrayIndex, timestamp) {
-    console.log(timestamp);
     this.logsArrayIndex = logsArrayIndex;
     this.timestamp = timestamp;
     this.next = null;

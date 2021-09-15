@@ -30,7 +30,7 @@ function runSolutions(sourceCount) {
       syncLogSources.push(new LogSource());
     }
     try {
-      require("./solution/sync-sorted-merge")(syncLogSources, new Printer());
+      // require("./solution/sync-sorted-merge")(syncLogSources, new Printer());
       resolve();
     } catch (e) {
       reject(e);
@@ -54,12 +54,12 @@ function runSolutions(sourceCount) {
       for (let i = 0; i < sourceCount; i++) {
         asyncLogSources.push(new LogSource());
       }
-      // require("./solution/async-sorted-merge")(asyncLogSources, new Printer())
-      //   .then(resolve)
-      //   .catch(reject);
+      require("./solution/async-sorted-merge")(asyncLogSources, new Printer())
+        .then(resolve)
+        .catch(reject);
     });
   });
 }
 
 // Adjust this input to see how your solutions perform under various loads.
-runSolutions(10000);
+runSolutions(100);
