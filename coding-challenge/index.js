@@ -30,7 +30,7 @@ function runSolutions(sourceCount) {
       syncLogSources.push(new LogSource());
     }
     try {
-      // require("./solution/sync-sorted-merge")(syncLogSources, new Printer());
+      require("./solution/sync-sorted-merge")(syncLogSources, new Printer());
       resolve();
     } catch (e) {
       reject(e);
